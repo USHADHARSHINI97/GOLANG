@@ -1,0 +1,57 @@
+
+package main
+
+import "fmt"
+
+func search(Frm_stn string, To_stn string, doj string, class string, category string) {
+	fmt.Println("From:", Frm_stn, "\n", "To:", To_stn, "\n", "Date of Journey:", doj, "\n", "Class_type:", class, "\n", "Category:", category)
+}
+
+type journey interface {
+	dataalloction()
+	display()
+}
+
+type list_of_trains struct {
+	list map[int][]string
+}
+
+func (l *list_of_trains) dataalloction() {
+	l.list = make(map[int][]string)
+	l.list[22668] = []string{"SBC uday express", "depature time:14.15", "arrival_time:19.38", "seats available:028"}
+	l.list[12677] = []string{"Eranakulam express", "depature time:06.10", "arrival_time:12.03", "seats available:WL99"}
+}
+func (l *list_of_trains) display() {
+	fmt.Println("\n", l.list)
+}
+
+type booking_details struct {
+	name       string
+	age        int
+	gender     string
+	country    string
+	preference string
+}
+
+func (b *booking_details) dataalloction() {
+	b.name = "usha"
+	b.age = 25
+	b.gender = "female"
+	b.country = "india"
+	b.preference = "window side"
+}
+func (b *booking_details) display() {
+	fmt.Println("Name:", b.name, "\n", "Age:", b.age, "\n", "Gender:", b.gender, "\n", "Country:", b.country, "\n", "Preference:", b.preference)
+}
+func main() {
+	search("KSR Bengaluru", "Tiruppur", "28-05-2023", "2nd Sitting", "general")
+	var details list_of_trains
+	var booking booking_details
+	var travel journey
+	travel = &details
+	travel.dataalloction()
+	travel.display()
+	travel = &booking
+	travel.dataalloction()
+	travel.display()
+}
